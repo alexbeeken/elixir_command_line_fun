@@ -1,19 +1,13 @@
 defmodule MiniWow do
   def kill_mob(mob, character) do
     mob_exp = character.level * 5 + 45
-    xp = character.experience + mob_exp
-    character = %{ character | experience: xp }
+    Character.update_experience(character, mob_exp)
     IO.puts "#{mob} killed for #{mob_exp}. You have #{character.experience} xp."
     character
   end
 
   def main(_args) do
-    character =
-      %{
-        name: String.capitalize(Prompt.gets('name')),
-        experience: 0,
-        level: 1
-      }
+    character = Character.new(String.capitalize(Prompt.gets('name')))
     IO.puts "Hello, #{character.name}."
     main_menu(character)
   end

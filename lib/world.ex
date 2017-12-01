@@ -1,2 +1,0 @@
-defmodule World do
-end
