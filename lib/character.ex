@@ -1,7 +1,7 @@
 defmodule Character do
   def new(name) do
     %{
-      name: name,
+      name: String.capitalize(name),
       experience: 0,
       level: 1
     }
@@ -9,11 +9,17 @@ defmodule Character do
 
   def update_experience(character, gained) do
     xp = character.experience + gained
-    IO.puts "Level up? #{level_up?(character)}"
-    %{ character | experience: xp }
+    character = %{ character | experience: xp }
+    if level_up?(character), do: level_up(character), else: character
   end
 
   def level_up?(character) do
-    character.experience < Experience.level_for_experience(character.experience)
+    character.level <= Experience.level_for_experience(character.experience)
+  end
+
+  def level_up(character) do
+    new_level = Experience.level_for_experience(character.experience)
+    IO.puts "Congratulations! You have reached level #{new_level}!"
+    %{ character | level: new_level }
   end
 end
