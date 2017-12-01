@@ -5,10 +5,6 @@ defmodule Experience do
     |> Enum.sum
   end
 
-  def get_exp([ h | t ], level) do
-    Enum.at(table, level - 1)
-  end
-
   def level_for_experience(xp, accum \\ 0, index \\ 0) do
     accum = accum + Enum.at(table, index)
     if accum > xp do
