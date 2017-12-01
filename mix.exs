@@ -1,12 +1,12 @@
-defmodule CommandLine.Mixfile do
+defmodule MiniWow.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :command_line,
+      app: :mini_wow,
       version: "0.1.0",
       elixir: "~> 1.5",
-      escript: [main_module: CommandLine],
+      escript: [main_module: MiniWow],
       start_permanent: Mix.env == :prod,
       deps: deps()
     ]
