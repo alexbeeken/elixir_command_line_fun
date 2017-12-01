@@ -1,16 +1,25 @@
 defmodule Experience do
   def experience_for_level(level) do
-    Enum.at(table, level)
+    table
+    |> Enum.take(level)
+    |> Enum.sum
   end
 
-  def level_for_experience(experience) do
-    IO.puts(experience)
-    Enum.find_index(table, &((&1 / experience) >= 1.0))
+  def get_exp([ h | t ], level) do
+    Enum.at(table, level - 1)
+  end
+
+  def level_for_experience(xp, accum \\ 0, index \\ 0) do
+    accum = accum + Enum.at(table, index)
+    if accum > xp do
+      index + 1
+    else
+      level_for_experience(xp, accum, index + 1)
+    end
   end
 
   def table do
     [
-      0,
       400,
       900,
       1400,
