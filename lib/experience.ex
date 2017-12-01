@@ -1,7 +1,7 @@
 defmodule Experience do
   def experience_for_level(level) do
     table
-    |> Enum.take(level)
+    |> Enum.take(level - 1)
     |> Enum.sum
   end
 
@@ -79,16 +79,7 @@ defmodule Experience do
       195000,
       202300,
       209800,
-      494000,
-      574700,
-      614400,
-      650300,
-      682300,
-      710200,
-      734100,
-      753700,
-      768900,
-      779700
+      494000
     ]
   end
 end
