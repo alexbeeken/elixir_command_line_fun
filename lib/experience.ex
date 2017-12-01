@@ -4,7 +4,8 @@ defmodule Experience do
   end
 
   def level_for_experience(experience) do
-    Enum.find(table, &(&1 <= experience))
+    IO.puts(experience)
+    Enum.find_index(table, &((&1 / experience) >= 1.0))
   end
 
   def table do
