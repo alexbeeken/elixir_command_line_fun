@@ -15,6 +15,10 @@ defmodule Console do
     Enum.at(choices, choice)
   end
 
+  def gets(thing) do
+    IO.gets("What is your #{thing}?")
+  end
+
   def menu(lines) do
     IO.ANSI.clear
     Enum.map(lines, &(IO.puts(&1)))

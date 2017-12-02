@@ -1,7 +1,8 @@
 defmodule Interface do
+
   def ask_for_name do
     "name"
-    |> Prompt.gets
+    |> Console.gets
     |> String.capitalize
   end
 
@@ -10,13 +11,9 @@ defmodule Interface do
     IO.puts message
   end
 
-  def main_menu(state) do
-    action = Console.choice("Main Menu", [ "Actions", "Character" ])
-    Action.perform(state, action)
-  end
-
-  def action_menu(state) do
-    action = Console.choice("Actions", [ "Kill", "Main Menu" ])
+  def menu(state, title) do
+    atom = String.to_atom(title)
+    action = Console.choice(String.capitalize(title), apply(Menus, atom, []))
     Action.perform(state, action)
   end
 end

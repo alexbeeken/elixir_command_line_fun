@@ -3,13 +3,14 @@ defmodule Action do
     case action do
       "Actions" ->
         state
-        |> Interface.action_menu
+        |> Interface.menu("action")
       "Character" ->
         state
         |> State.show_status("character")
         |> Interface.message
+        |> Interface.menu("main")
       "Main Menu" ->
-        Interface.main_menu(state)
+        Interface.menu(state, "main")
     end
   end
 end
