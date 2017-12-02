@@ -1,4 +1,12 @@
 defmodule Experience do
+  def build_a_bar(num_bars, count \\ 0) do
+    if count == num_bars do
+      Enum.join(List.duplicate(" ", 20 - num_bars))
+    else
+      "#" <> build_a_bar(num_bars, count + 1)
+    end
+  end
+
   def experience_for_level(level) do
     table
     |> Enum.take(level - 1)
@@ -11,6 +19,20 @@ defmodule Experience do
       index + 1
     else
       level_for_experience(xp, accum, index + 1)
+    end
+  end
+
+  def progress_bar(experience, level) do
+    if level != 60 do
+      next_xp = Enum.at(table, level - 1)
+      current_xp = experience - experience_for_level(level)
+      num_bars =
+        current_xp
+        |> Kernel./(next_xp)
+        |> Kernel.*(20)
+        |> Float.floor
+        |> round
+      build_a_bar(num_bars)
     end
   end
 

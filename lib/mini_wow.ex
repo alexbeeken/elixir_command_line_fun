@@ -1,7 +1,7 @@
 defmodule MiniWow do
   def kill_mob(mob, character) do
     mob_exp = character.level * 5 + 45
-    Console.message "You killed #{mob}."
+    Console.message "You killed #{mob.name}."
     Character.update_experience(character, mob_exp)
   end
 
@@ -22,7 +22,7 @@ defmodule MiniWow do
   end
 
   def action_menu(character) do
-    action = Prompt.choice("Actions", ["Kill Mindless Zombie", "Main Menu"])
+    action = Prompt.choice("Actions", ["Battle", "Main Menu"])
     perform_action(action, character)
   end
 
@@ -33,8 +33,8 @@ defmodule MiniWow do
       "Character" ->
         Character.show_status(character)
         main_menu(character)
-      "Kill Mindless Zombie" ->
-        apply(__MODULE__, :kill_mob, ["Mindless Zombie", character])
+      "Battle" ->
+        apply(__MODULE__, :kill_mob, [CreaturesData.next_random(character.level), character])
         |> action_menu
       "Main Menu" ->
         apply(__MODULE__, :main_menu, [character])

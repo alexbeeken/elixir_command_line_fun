@@ -14,18 +14,20 @@ defmodule Character do
   def update_experience(character, gained) do
     xp = character.experience + gained
     character = %{ character | experience: xp }
-    Console.message "You gained #{gained}"
-    if level_up?(character), do: level_up(character), else: character
+    Console.message "You gained #{gained} xp."
+    character = level_up_check(character)
+    Console.message Experience.progress_bar(character.experience, character.level)
+    character
   end
 
-  def level_up?(character) do
-    character.level + 1 <= Experience.level_for_experience(character.experience)
-  end
-
-  def level_up(character) do
-    new_level = Experience.level_for_experience(character.experience)
-    IO.puts "Congratulations! You have reached level #{new_level}!"
-    %{ character | level: new_level }
+  def level_up_check(character) do
+    if character.level < Experience.level_for_experience(character.experience) do
+      new_level = Experience.level_for_experience(character.experience)
+      IO.puts "Congratulations! You have reached level #{new_level}!"
+      %{ character | level: new_level }
+    else
+      character
+    end
   end
 
   def show_status(character) do
