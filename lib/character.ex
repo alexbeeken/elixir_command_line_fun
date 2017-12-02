@@ -1,10 +1,14 @@
 defmodule Character do
   def new(name) do
-    %{
-      name: String.capitalize(name),
-      experience: 0,
-      level: 1
-    }
+    if valid_name?(name) do
+      { :ok, %{
+        name: String.capitalize(name),
+        experience: 0,
+        level: 1
+      } }
+    else
+      { :error, "Name should be between 3 - 12 characters and only contain letters."}
+    end
   end
 
   def update_experience(character, gained) do
@@ -21,5 +25,11 @@ defmodule Character do
     new_level = Experience.level_for_experience(character.experience)
     IO.puts "Congratulations! You have reached level #{new_level}!"
     %{ character | level: new_level }
+  end
+
+  def valid_name?(name) do
+    len = String.length(name)
+    Regex.match?(~r/^[a-zA-Z]+$/, name)
+      && 2 < len && len < 13
   end
 end

@@ -7,9 +7,14 @@ defmodule MiniWow do
   end
 
   def main(_args) do
-    character = Character.new(String.capitalize(Prompt.gets('name')))
-    IO.puts "Hello, #{character.name}."
-    main_menu(character)
+    case Character.new(String.capitalize(Prompt.gets('name'))) do
+      { :ok, character } ->
+        IO.puts "Hello, #{character.name}."
+        main_menu(character)
+      { :error, message } ->
+        IO.puts message
+        System.halt(0)
+    end
   end
 
   def main_menu(character) do
