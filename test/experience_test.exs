@@ -12,7 +12,7 @@ defmodule ExperienceTest do
     end
 
     test "shows 19 bars for 99% of level" do
-      assert Experience.progress_bar(399, 1) == "[ ################### ]"
+      assert Experience.progress_bar(399, 1) == "[ ###################- ]"
     end
   end
 

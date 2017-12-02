@@ -6,38 +6,8 @@ defmodule MiniWow do
   end
 
   def main(_args) do
-    case Character.new(String.capitalize(Prompt.gets('name'))) do
-      { :ok, character } ->
-        Console.message "Hello, #{character.name}."
-        main_menu(character)
-      { :error, message } ->
-        Console.message message
-        System.halt(0)
-    end
-  end
-
-  def main_menu(character) do
-    action = Prompt.choice("Main Menu", ["Actions", "Character"])
-    perform_action(action, character)
-  end
-
-  def action_menu(character) do
-    action = Prompt.choice("Actions", ["Battle", "Main Menu"])
-    perform_action(action, character)
-  end
-
-  def perform_action(action, character) do
-    case action do
-      "Actions" ->
-        action_menu(character)
-      "Character" ->
-        Character.show_status(character)
-        main_menu(character)
-      "Battle" ->
-        apply(__MODULE__, :kill_mob, [CreaturesData.next_random(character.level), character])
-        |> action_menu
-      "Main Menu" ->
-        apply(__MODULE__, :main_menu, [character])
-    end
+    %{ name: Interface.ask_for_name }
+    |> State.new
+    |> Interface.main_menu
   end
 end

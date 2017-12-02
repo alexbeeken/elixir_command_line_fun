@@ -30,8 +30,8 @@ defmodule Character do
     end
   end
 
-  def show_status(character) do
-    Console.new_menu [
+  def status(character) do
+    [
       "-----------------------",
       "Name: #{character.name}",
       "Experience: #{character.experience}/#{Experience.experience_for_level(character.level + 1)}",
