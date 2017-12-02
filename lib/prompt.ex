@@ -6,16 +6,7 @@ defmodule Prompt do
       |> String.downcase
       |> String.replace("\n", "")
     Console.clear
-    cond do
-      count > 3 ->
-        IO.puts "Too much nonsense"
-        System.halt(0)
-      length(String.split(thing)) == 1 ->
-        thing
-      true ->
-        IO.puts "Classes must be one word"
-        gets(thing, count + 1)
-    end
+    thing
   end
 
   def choice(thing, choices) do

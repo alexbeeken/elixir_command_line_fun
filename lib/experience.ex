@@ -1,9 +1,14 @@
 defmodule Experience do
   def build_a_bar(num_bars, count \\ 0) do
-    if count == num_bars do
-      Enum.join(List.duplicate(" ", 20 - num_bars))
-    else
-      "#" <> build_a_bar(num_bars, count + 1)
+    cond do
+      num_bars == 0 ->
+        "[ " <> Enum.join(List.duplicate("-", 20)) <> " ]"
+      count == 0 ->
+        "[ #" <> build_a_bar(num_bars, count + 1)
+      count >= num_bars ->
+        Enum.join(List.duplicate("-", 20 - num_bars)) <> " ]"
+      true ->
+        "#" <> build_a_bar(num_bars, count + 1)
     end
   end
 

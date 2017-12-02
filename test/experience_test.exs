@@ -4,15 +4,15 @@ defmodule ExperienceTest do
 
   describe "Experience.progress_bar/1" do
     test "shows 10 bars for 50% of level" do
-      assert Experience.progress_bar(200, 1) == "##########          "
+      assert Experience.progress_bar(200, 1) == "[ ##########---------- ]"
     end
 
     test "shows 15 bars for 75% of level" do
-      assert Experience.progress_bar(300, 1) == "###############     "
+      assert Experience.progress_bar(300, 1) == "[ ###############----- ]"
     end
 
     test "shows 19 bars for 99% of level" do
-      assert Experience.progress_bar(399, 1) == "################### "
+      assert Experience.progress_bar(399, 1) == "[ ################### ]"
     end
   end
 
