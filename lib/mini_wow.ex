@@ -1,9 +1,8 @@
 defmodule MiniWow do
   def kill_mob(mob, character) do
     mob_exp = character.level * 5 + 45
+    IO.puts "You killed #{mob}."
     Character.update_experience(character, mob_exp)
-    IO.puts "#{mob} killed for #{mob_exp}. You have #{character.experience} xp."
-    character
   end
 
   def main(_args) do
@@ -32,13 +31,13 @@ defmodule MiniWow do
       "Actions" ->
         action_menu(character)
       "Character" ->
-        IO.puts "Name: #{character.name}"
-        IO.puts "Experience: #{character.experience}"
-        IO.puts "Level: #{character.level}"
+        Character.show_status(character)
         main_menu(character)
       "Kill Mindless Zombie" ->
         apply(__MODULE__, :kill_mob, ["Mindless Zombie", character])
         |> action_menu
+      "Main Menu" ->
+        apply(__MODULE__, :main_menu, [character])
     end
   end
 end
