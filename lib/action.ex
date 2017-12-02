@@ -7,10 +7,11 @@ defmodule Action do
       "Character" ->
         state
         |> State.show_status("character")
-        |> Interface.message
         |> Interface.menu("main")
       "Main Menu" ->
         Interface.menu(state, "main")
+      "Battle Menu" ->
+        Interface.menu(state, "battle")
     end
   end
 end

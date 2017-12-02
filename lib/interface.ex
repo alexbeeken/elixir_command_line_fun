@@ -8,12 +8,21 @@ defmodule Interface do
 
   def message(message) do
     IO.ANSI.clear
-    IO.puts message
+    message
+    |> Enum.join("\n")
+    |> IO.puts
   end
 
   def menu(state, title) do
-    atom = String.to_atom(title)
-    action = Console.choice(String.capitalize(title), apply(Menus, atom, []))
+    action =
+      title
+      |> String.capitalize
+      |> Console.choice(menu_options(title))
+
     Action.perform(state, action)
+  end
+
+  def menu_options(title) do
+    apply(Menus, String.to_atom(title), [])
   end
 end

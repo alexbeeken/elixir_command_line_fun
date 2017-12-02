@@ -12,6 +12,7 @@ defmodule Console do
       |> Kernel.-(1)
 
     Console.clear
+    IO.puts choice
     Enum.at(choices, choice)
   end
 

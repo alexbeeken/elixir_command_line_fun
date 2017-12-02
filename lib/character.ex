@@ -43,6 +43,6 @@ defmodule Character do
   def valid_name?(name) do
     len = String.length(name)
     Regex.match?(~r/^[a-zA-Z]+$/, name)
-      && 2 < len && len < 13
+      && 3 < len && len < 13
   end
 end
