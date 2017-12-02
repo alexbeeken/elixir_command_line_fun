@@ -14,7 +14,7 @@ defmodule Character do
   def update_experience(character, gained) do
     xp = character.experience + gained
     character = %{ character | experience: xp }
-    IO.puts "You gained #{gained}"
+    Console.message "You gained #{gained}"
     if level_up?(character), do: level_up(character), else: character
   end
 
@@ -29,11 +29,13 @@ defmodule Character do
   end
 
   def show_status(character) do
-    IO.puts "-----------------------"
-    IO.puts "Name: #{character.name}"
-    IO.puts "Experience: #{character.experience}/#{Experience.experience_for_level(character.level + 1)}"
-    IO.puts "Level: #{character.level}"
-    IO.puts "-----------------------"
+    Console.new_menu [
+      "-----------------------",
+      "Name: #{character.name}",
+      "Experience: #{character.experience}/#{Experience.experience_for_level(character.level + 1)}",
+      "Level: #{character.level}",
+      "-----------------------"
+    ]
   end
 
   def valid_name?(name) do

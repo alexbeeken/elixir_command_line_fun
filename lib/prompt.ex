@@ -5,6 +5,7 @@ defmodule Prompt do
       |> IO.gets
       |> String.downcase
       |> String.replace("\n", "")
+    Console.clear
     cond do
       count > 3 ->
         IO.puts "Too much nonsense"
@@ -25,6 +26,7 @@ defmodule Prompt do
       |> String.to_integer
       |> Kernel.-(1)
 
+    Console.clear
     Enum.at(choices, choice)
   end
 

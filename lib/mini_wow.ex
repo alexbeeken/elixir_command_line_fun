@@ -1,17 +1,17 @@
 defmodule MiniWow do
   def kill_mob(mob, character) do
     mob_exp = character.level * 5 + 45
-    IO.puts "You killed #{mob}."
+    Console.message "You killed #{mob}."
     Character.update_experience(character, mob_exp)
   end
 
   def main(_args) do
     case Character.new(String.capitalize(Prompt.gets('name'))) do
       { :ok, character } ->
-        IO.puts "Hello, #{character.name}."
+        Console.message "Hello, #{character.name}."
         main_menu(character)
       { :error, message } ->
-        IO.puts message
+        Console.message message
         System.halt(0)
     end
   end
