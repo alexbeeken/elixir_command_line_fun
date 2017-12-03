@@ -13,13 +13,13 @@ defmodule Experience do
   end
 
   def experience_for_level(level) do
-    table
+    table()
     |> Enum.take(level - 1)
     |> Enum.sum
   end
 
   def level_for_experience(xp, accum \\ 0, index \\ 0) do
-    accum = accum + Enum.at(table, index)
+    accum = accum + Enum.at(table(), index)
     if accum > xp do
       index + 1
     else
@@ -29,7 +29,7 @@ defmodule Experience do
 
   def progress_bar(experience, level) do
     if level != 60 do
-      next_xp = Enum.at(table, level - 1)
+      next_xp = Enum.at(table(), level - 1)
       current_xp = experience - experience_for_level(level)
       num_bars =
         current_xp

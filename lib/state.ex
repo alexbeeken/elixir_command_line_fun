@@ -2,10 +2,10 @@ defmodule State do
   def new(options \\ %{ name: "noname" }) do
     case Character.new(options.name) do
       { :error, message } ->
-        Interface.message [message]
+        Interface.message message
         MiniWow.main([])
       { :ok, character } ->
-        Interface.message ["Hello, #{character.name}."]
+        Interface.message "Hello, #{character.name}."
         %{ character: character }
     end
   end
@@ -18,5 +18,15 @@ defmodule State do
         |> Interface.message
       state
     end
+  end
+
+  def fight_enemy(state, enemy) do
+    Interface.message "You killed #{enemy.name}."
+    character = Character.update_experience(state.character, enemy.exp)
+    update_character(state, character)
+  end
+
+  def update_character(state, character) do
+    %{ state | character: character }
   end
 end

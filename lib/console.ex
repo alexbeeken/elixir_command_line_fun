@@ -12,7 +12,6 @@ defmodule Console do
       |> Kernel.-(1)
 
     Console.clear
-    IO.puts choice
     Enum.at(choices, choice)
   end
 
@@ -26,6 +25,11 @@ defmodule Console do
   end
 
   def message(message) do
+    message = if is_list(message) do
+                Enum.join(message, "\n")
+              else
+                message
+              end
     IO.puts message
   end
 

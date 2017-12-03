@@ -8,9 +8,7 @@ defmodule Interface do
 
   def message(message) do
     IO.ANSI.clear
-    message
-    |> Enum.join("\n")
-    |> IO.puts
+    Console.message(message)
   end
 
   def menu(state, title) do

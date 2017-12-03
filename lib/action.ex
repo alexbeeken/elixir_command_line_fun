@@ -1,6 +1,11 @@
 defmodule Action do
   def perform(state, action) do
     case action do
+      "Fight" ->
+        enemy = CreaturesData.next_random(state)
+        state
+        |> State.fight_enemy(enemy)
+        |> Interface.menu("battle")
       "Actions" ->
         state
         |> Interface.menu("action")
